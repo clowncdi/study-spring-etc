@@ -28,6 +28,13 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation group: 'org.apache.poi', name: 'poi', version: '4.1.2'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+
+
 }
 
 test {
