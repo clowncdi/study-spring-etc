@@ -17,7 +17,8 @@ import javax.imageio.ImageIO;
  * height					자를 이미지 높이(2364)
  */
 public class CropImage {
-	private static final String PATH = "C:\\Users\\dev2\\Desktop\\test\\";
+	private static final String PATH = "C:\\Users\\dev2\\Desktop\\test\\"; // Windows
+//	private static final String PATH = "/Users/yd/Downloads/test/"; // Mac
 	private static final String EXTENSION = ".png";
 	private static int firstHeight;
 	private static int height;
