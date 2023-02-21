@@ -21,3 +21,12 @@ Content-Type: application/json
   "name": "",
   "email": "asdf"
 }
+
+###
+
+POST localhost:8080/members
+Content-Type: application/json
+
+{
+  "email": "bbb@gmail.com"
+}
