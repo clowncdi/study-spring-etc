@@ -11,3 +11,13 @@ GET localhost:8080/sample?value=123
 ###
 
 GET localhost:8080/sample?value=abc
+
+###
+
+POST localhost:8080/sample
+Content-Type: application/json
+
+{
+  "name": "",
+  "email": "asdf"
+}

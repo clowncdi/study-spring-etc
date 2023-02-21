@@ -3,6 +3,7 @@ package error_response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -21,6 +22,13 @@ public class GlobalExceptionHandler {
 		log.error("handlerException", e);
 		final ErrorResponse response = ErrorResponse.of(ErrorCode.INTENAL_SERVER_ERROR);
 		return new ResponseEntity<>(response, HttpStatus.valueOf(ErrorCode.INTENAL_SERVER_ERROR.getStatus()));
+	}
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+		final ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
+		final ErrorResponse response = ErrorResponse.of(errorCode, e.getBindingResult());
+		return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
 	}
 
 	/**
