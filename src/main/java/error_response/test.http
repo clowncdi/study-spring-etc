@@ -30,3 +30,25 @@ Content-Type: application/json
 {
   "email": "bbb@gmail.com"
 }
+
+###
+
+POST localhost:8080/orders
+Content-Type: application/json
+
+{
+  "price": 100.00,
+  "payment": {
+    "paymentMethod": "BANK_TRANSFER",
+    "account": {
+      "number": "1234567890",
+      "bankCode": "",
+      "holder": ""
+    }
+  },
+  "address": {
+    "city": "서울",
+    "state": "강남",
+    "zipCode": "12345"
+  }
+}
