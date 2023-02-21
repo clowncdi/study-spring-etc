@@ -21,5 +21,12 @@ public class Main {
 					builder.createdAt = LocalDateTime.now();
 				}).build();
 		System.out.println(user2.toString());
+
+		Foo bob1 = Foo.createFooByName()
+				.name("Bob")
+				.build();
+		Foo bob2 = Foo.createFooByEmail()
+				.email(new Foo.Email("Bob@gmail.com"))
+				.build();
 	}
 }
