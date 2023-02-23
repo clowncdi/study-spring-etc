@@ -1,0 +1,10 @@
+POST localhost:8080/members
+Content-Type: application/json
+
+{
+  "name": "dalichoi"
+}
+
+###
+
+GET localhost:8080/members

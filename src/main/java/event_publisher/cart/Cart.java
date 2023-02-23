@@ -1,4 +1,4 @@
-package error_response.Member;
+package event_publisher.cart;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,24 +7,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
-@Table(name = "member")
+@Table(name = "cart")
 @Getter
-@NoArgsConstructor
-public class Member {
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Cart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", nullable = false, unique = true)
-	private String name;
+	@Column(name = "product_id", nullable = false)
+	private Long productId;
 
-	public Member(String name) {
-		this.name = name;
+	public Cart(Long productId) {
+		this.productId = productId;
 	}
-
 }
