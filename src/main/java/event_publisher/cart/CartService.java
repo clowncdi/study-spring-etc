@@ -22,6 +22,6 @@ public class CartService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		throw new RuntimeException("RuntimeException 발생"); // 예외 발생
+		// throw new RuntimeException("RuntimeException 발생"); // 예외 발생
 	}
 }

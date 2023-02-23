@@ -8,3 +8,4 @@ Content-Type: application/json
 ###
 
 GET localhost:8080/members
+Content-Type: application/json

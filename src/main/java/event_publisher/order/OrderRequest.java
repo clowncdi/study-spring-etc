@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class OrderRequest {
 
-	private BigDecimal productAmount;
 	private Long productId;
+	private BigDecimal productAmount;
 	private Orderer orderer;
 
 	public Order toEntity() {
