@@ -4,15 +4,28 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class Validation01 {
+
+	private final ItemValidator itemValidator;
+
+	// 이 컨트롤러가 요청될 때 바인더가 생성되고 이 바인더에 validator를 등록한다.
+	@InitBinder
+	public void init(WebDataBinder dataBinder) {
+		dataBinder.addValidators(itemValidator);
+	}
 
 	/**
 	 * Validation V1 - BindingResult 검증
@@ -143,5 +156,39 @@ public class Validation01 {
 			return "binding-result-v4";
 		}
 		return "binding-result-v4";
+	}
+
+	/**
+	 * 별도의 Validator로 분리하여 검증하는 방법
+	 */
+	@PostMapping("/valid-v5")
+	public String bindingResultV5(@ModelAttribute Item item, BindingResult bindingResult) {
+
+		// 검증 로직
+		if (itemValidator.supports(Item.class)) {
+			itemValidator.validate(item, bindingResult);
+		}
+
+		if (bindingResult.hasErrors()) {
+			log.info("errors={}", bindingResult);
+			return "binding-result-v5";
+		}
+		return "binding-result-v5";
+	}
+
+	/**
+	 * WebDataBinder를 사용하여 검증하는 방법
+	 * @Validated 를 꼭 넣어줘야 함.
+	 * 여러 검증기가 존재한다면 이 때 supports()가 사용된다.
+	 * @Validated 는 스프링 전용 검증 애노테이션이고,
+	 * @Valid 는 javax 표준 검증 애노테이션으로 사용하려면 의존관계 추가가 필요하다.
+	 */
+	@PostMapping("/valid-v6")
+	public String bindingResultV6(@Validated @ModelAttribute Item item, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			log.info("errors={}", bindingResult);
+			return "binding-result-v6";
+		}
+		return "binding-result-v6";
 	}
 }
