@@ -19,6 +19,8 @@ import lombok.RequiredArgsConstructor;
  * 동시성 문제는 값을 읽기만 하면 발생하지 않는다. 어디선가 값을 변경하기 때문에 발생한다.
  *
  * 싱글톤 객체를 사용하면서 동시성 문제를 해결하기 위해 쓰레드 로컬을 사용한다.
+ * 주의!
+ * 쓰레드 로컬의 값을 사용 후 제거하지 않고 그냥 두면 WAS(톰캣)처럼 쓰레드 풀을 사용하는 경우에 심각한 문제가 발생할 수 있다.
  */
 @RestController
 @RequiredArgsConstructor
