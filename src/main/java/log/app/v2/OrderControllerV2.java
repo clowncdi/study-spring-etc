@@ -1,9 +1,9 @@
-package log.app.v2.v1;
+package log.app.v2;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import log.hellotrace.HelloTraceV2;
+import log.trace.hellotrace.HelloTraceV2;
 import log.trace.TraceStatus;
 import lombok.RequiredArgsConstructor;
 

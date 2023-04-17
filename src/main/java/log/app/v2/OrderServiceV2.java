@@ -1,8 +1,8 @@
-package log.app.v2.v1;
+package log.app.v2;
 
 import org.springframework.stereotype.Service;
 
-import log.hellotrace.HelloTraceV2;
+import log.trace.hellotrace.HelloTraceV2;
 import log.trace.TraceId;
 import log.trace.TraceStatus;
 import lombok.RequiredArgsConstructor;

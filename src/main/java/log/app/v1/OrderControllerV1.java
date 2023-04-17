@@ -3,7 +3,7 @@ package log.app.v1;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import log.hellotrace.HelloTraceV1;
+import log.trace.hellotrace.HelloTraceV1;
 import log.trace.TraceStatus;
 import lombok.RequiredArgsConstructor;
 
