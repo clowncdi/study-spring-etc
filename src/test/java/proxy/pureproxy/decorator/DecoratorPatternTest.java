@@ -15,7 +15,7 @@ import proxy.pureproxy.decorator.code.TimeDecorator;
  * 예) 실행 시간을 측정해서 추가 로그를 남긴다.
  */
 @Slf4j
-public class DecoratorPatternTest {
+class DecoratorPatternTest {
 
 	@Test
 	void noDecorator() {
