@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import proxy.app.v1.OrderServiceV1;
 
 @RequiredArgsConstructor
-public class OrderServiceInterfaceProxy implements OrderServiceV1{
+public class OrderServiceInterfaceProxy implements OrderServiceV1 {
 
 	private final OrderServiceV1 target;
 	private final LogTrace logTrace;
