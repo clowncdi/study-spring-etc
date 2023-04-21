@@ -14,6 +14,11 @@ import proxy.app.v2.OrderRepositoryV2;
 import proxy.app.v2.OrderServiceV2;
 import proxy.config.v3_proxyfactory.advice.LogTraceAdvice;
 
+/**
+ * 빈 후처리기 - BeanPostProcessor
+ * 스프링 빈 저장소에 등록할 목적으로 생성한 객체를 빈 저장소에 등록하기 직전에 조작하고 싶다면 빈 후처리기를 사용하면 된다.
+ * 객체를 조작할 수도 있고, 완전히 다른 객체로 바꿔치기 하는 것도 가능하다.
+ */
 @Slf4j
 @Configuration
 public class ProxyFactoryConfigV2 {

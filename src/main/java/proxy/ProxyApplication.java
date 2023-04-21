@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 
 import log.trace.logtrace.LogTrace;
 import log.trace.logtrace.ThreadLocalLogTrace;
-import proxy.config.v3_proxyfactory.ProxyFactoryConfigV2;
+import proxy.config.v4_postprocessor.BeanPostProcessorConfig;
 
 /**
  * 프록시 패턴 : 접근 제어가 목적
@@ -20,7 +20,8 @@ import proxy.config.v3_proxyfactory.ProxyFactoryConfigV2;
 // @Import(DynamicProxyBasicConfig.class)
 // @Import(DynamicProxyFilterConfig.class)
 // @Import(ProxyFactoryConfigV1.class)
-@Import(ProxyFactoryConfigV2.class)
+// @Import(ProxyFactoryConfigV2.class)
+@Import(BeanPostProcessorConfig.class)
 @SpringBootApplication(scanBasePackages = "proxy.app")
 public class ProxyApplication {
 	public static void main(String[] args) {
