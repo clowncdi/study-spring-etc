@@ -7,10 +7,12 @@ import org.springframework.context.annotation.Import;
 
 import lombok.extern.slf4j.Slf4j;
 import proxy.app.aop.exam.ExamService;
+import proxy.app.aop.exam.aop.RetryAspect;
 import proxy.app.aop.exam.aop.TraceAspect;
 
 @Slf4j
-@Import(TraceAspect.class)
+// @Import(TraceAspect.class)
+@Import({TraceAspect.class, RetryAspect.class})
 @SpringBootTest
 class ExamTest {
 
