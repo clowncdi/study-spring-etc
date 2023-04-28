@@ -1,9 +1,9 @@
-package proxy.config.v6_aop.member;
+package proxy.app.aop.member;
 
 import org.springframework.stereotype.Component;
 
-import proxy.config.v6_aop.member.annotation.ClassAop;
-import proxy.config.v6_aop.member.annotation.MethodAop;
+import proxy.app.aop.member.annotation.ClassAop;
+import proxy.app.aop.member.annotation.MethodAop;
 
 @ClassAop
 @Component

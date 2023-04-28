@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 
 import lombok.extern.slf4j.Slf4j;
-import proxy.config.v6_aop.member.MemberServiceImpl;
+import proxy.app.aop.member.MemberServiceImpl;
 
 import static org.assertj.core.api.Assertions.*;
 
