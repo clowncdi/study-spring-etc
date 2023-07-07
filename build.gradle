@@ -36,6 +36,10 @@ dependencies {
     // reactive-web : spring-boot-starter-web과 같이 사용하지 않는 게 좋다.(톰캣을 우선하기 때문)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'io.projectreactor:reactor-test'
+    // crawling - jsoup
+    implementation 'org.jsoup:jsoup:1.16.1'
+    // crawling - selenium
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.10.0'
 
     // https://mvnrepository.com/artifact/org.apache.poi/poi
     implementation group: 'org.apache.poi', name: 'poi', version: '4.1.2'
