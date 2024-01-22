@@ -32,7 +32,7 @@ public class CrawlingApp {
             .collect(Collectors.toList());
 
         String xPath = "//tr[contains(@class, 'PriceList_tr')][1]";
-        String xPathVix = "//*[@id=\"content\"]/div[9]/div[2]/div[3]/table/tbody/tr[1]";
+        String xPathVix = "//*[@id=\"content\"]/div[10]/div[2]/div[3]/table/tbody/tr[1]";
         crawling(FinanceType.WTI, collect, xPath); //WTI
         crawling(FinanceType.DXY, collect, xPath); //달러인덱스
         crawling(FinanceType.VIX, collect, xPathVix); //VIX
