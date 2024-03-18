@@ -1,5 +1,10 @@
 package crawling;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,12 +13,6 @@ import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-
 @Slf4j
 public class ChromiumDriver extends BrowserDriver<ChromeDriver> {
     private final String WEB_DRIVER_ID = "webdriver.chrome.driver";
@@ -21,9 +20,9 @@ public class ChromiumDriver extends BrowserDriver<ChromeDriver> {
 //    private final String WEB_DRIVER_PATH = "C:\\chromedriver\\chromedriver.exe";
 //    private final String DOWNLOAD_PATH = "C:\\chromedriver\\downloads";
     //mac
-    private final String WEB_DRIVER_PATH = "/usr/local/bin/chromedriver";
+    private final String WEB_DRIVER_PATH = "/Users/yd/bin/chromedriver/chromedriver";
     private final String DOWNLOAD_PATH = "/Users/yd/Downloads";
-    private final String userAgents[] = {
+    private final String[] userAgents = {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246", //Windows 10-based PC using Edge browser
         "Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36", //Chrome OS-based laptop using Chrome browser (Chromebook)
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9", //Mac OS X-based computer using a Safari browser

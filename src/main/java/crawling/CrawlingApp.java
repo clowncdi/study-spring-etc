@@ -2,13 +2,12 @@ package crawling;
 
 import crawling.dto.FinanceType;
 import crawling.dto.NaverWorldFinance;
-import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 @Slf4j
 public class CrawlingApp {
@@ -47,6 +46,7 @@ public class CrawlingApp {
     private static void crawling(FinanceType type, List<NaverWorldFinance> collect, String xPath) {
         driver.open(type.getUrl());
         driver.wait(1);
+        validModal();
         collect.add(driver.getListXpath(xPath).stream()
             .map(el -> NaverWorldFinance.builder()
                 .title(type.getTitle())
@@ -54,6 +54,14 @@ public class CrawlingApp {
                 .rate(el.findElement(By.xpath(".//td[4]")).getText())
                 .build())
             .findFirst().get());
+    }
+
+    private static void validModal() {
+        WebElement xpath = driver.getXpath("//div[contains(@class, 'BottomModalNoticeWrapper-module_inner')]");
+        if (xpath != null) {
+            log.info("modal 존재함");
+            driver.getXpath("//button[contains(@class, 'BottomModalNoticeWrapper-module_button-close')]").click();
+        }
     }
 
     private static void crawlingBitcoin(FinanceType type, List<NaverWorldFinance> collect) {
