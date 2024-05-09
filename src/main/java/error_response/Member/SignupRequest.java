@@ -1,8 +1,8 @@
 package error_response.Member;
 
-import javax.validation.constraints.Email;
 
 import error_response.validation.EmailUnique;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 
 @Getter

@@ -1,14 +1,11 @@
 package error_response.validation;
 
-import java.text.MessageFormat;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
-import org.springframework.stereotype.Component;
-
 import error_response.Member.MemberRepository;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import java.text.MessageFormat;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

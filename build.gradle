@@ -1,13 +1,13 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
     id 'jacoco'
 }
 
 group = 'java'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '21'
 
 configurations {
     compileOnly {
@@ -39,7 +39,7 @@ dependencies {
     // crawling - jsoup
     implementation 'org.jsoup:jsoup:1.16.1'
     // crawling - selenium
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.10.0'
+    implementation 'org.seleniumhq.selenium:selenium-java'
 
     // https://mvnrepository.com/artifact/org.apache.poi/poi
     implementation group: 'org.apache.poi', name: 'poi', version: '4.1.2'

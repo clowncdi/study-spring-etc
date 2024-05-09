@@ -1,8 +1,7 @@
 package event_publisher.order;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
 
 @Embeddable

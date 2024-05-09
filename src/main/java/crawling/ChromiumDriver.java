@@ -2,6 +2,7 @@ package crawling;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -10,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Slf4j
@@ -37,7 +37,7 @@ public class ChromiumDriver extends BrowserDriver<ChromeDriver> {
         setCustomOption();
         chromeDriverLogging();
         this.driver = new ChromeDriver(options);
-        this.driverWait = new WebDriverWait(this.driver, 5);
+        this.driverWait = new WebDriverWait(this.driver, Duration.ofSeconds(5));
     }
 
     /**
@@ -87,6 +87,6 @@ public class ChromiumDriver extends BrowserDriver<ChromeDriver> {
         // 성능 로그 설정
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-        options.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+        options.setCapability("goog:loggingPrefs", logPrefs);
     }
 }
