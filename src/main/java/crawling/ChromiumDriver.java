@@ -66,6 +66,7 @@ public class ChromiumDriver extends BrowserDriver<ChromeDriver> {
         options.addArguments("--disable-notifications"); // 알림 비활성
         options.addArguments("--disable-extensions"); // 확장 프로그램 비활성
         options.addArguments("--disable-setuid-sandbox"); // root 권한 무시
+        options.addArguments("--disable-dev-shm-usage"); // 공유 메모리 사용을 비활성화
         options.addArguments("--single-process");
         options.addArguments("--remote-allow-origins=*"); // 크로스 도메인 허용
     }

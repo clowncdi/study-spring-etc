@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 @Slf4j
 public class CrawlingApp {
 
-    private final static ChromiumDriver driver = new ChromiumDriver();
+    private static final ChromiumDriver driver = new ChromiumDriver();
 
     public static void main(String[] args) {
 
