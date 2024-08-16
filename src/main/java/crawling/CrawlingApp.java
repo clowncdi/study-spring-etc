@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.util.ObjectUtils;
 
 @Slf4j
 public class CrawlingApp {
@@ -15,7 +16,6 @@ public class CrawlingApp {
     private static final ChromiumDriver driver = new ChromiumDriver();
 
     public static void main(String[] args) {
-
 
         driver.open("https://finance.naver.com/world/");
         WebElement americaIndex = driver.get("#americaIndex");
@@ -31,14 +31,13 @@ public class CrawlingApp {
             .collect(Collectors.toList());
 
         String xPath = "//tr[contains(@class, 'PriceList_tr')][1]";
-        String xPathVix = "//*[@id=\"content\"]/div[10]/div[2]/div[3]/table/tbody/tr[1]";
         crawling(FinanceType.WTI, collect, xPath); //WTI
         crawling(FinanceType.DXY, collect, xPath); //달러인덱스
-        crawling(FinanceType.VIX, collect, xPathVix); //VIX
         crawling(FinanceType.GOLD, collect, xPath); //국제 금
-        crawlingBitcoin(FinanceType.BTC, collect); //비트코인
+        crawlingVix(collect); //VIX
+        crawlingBitcoin(collect); //비트코인
 
-        log.info("result = " + collect);
+        log.info("result: {}", collect);
         driver.close();
         driver.quit();
     }
@@ -46,30 +45,41 @@ public class CrawlingApp {
     private static void crawling(FinanceType type, List<NaverWorldFinance> collect, String xPath) {
         driver.open(type.getUrl());
         driver.wait(1);
-        validModal();
+//        validModal();
         collect.add(driver.getListXpath(xPath).stream()
             .map(el -> NaverWorldFinance.builder()
                 .title(type.getTitle())
                 .price(el.findElement(By.xpath(".//td[2]")).getText())
                 .rate(el.findElement(By.xpath(".//td[4]")).getText())
                 .build())
-            .findFirst().get());
+            .findFirst().orElse(null));
+    }
+
+    private static void crawlingVix(List<NaverWorldFinance> collect) {
+        driver.open(FinanceType.VIX.getUrl());
+        driver.wait(1);
+//        validModal();
+        collect.add(NaverWorldFinance.builder()
+            .title(FinanceType.VIX.getTitle())
+            .price(driver.getXpath("//*[@id=\"content\"]/div[2]/div[1]/div[1]/strong").getText())
+            .rate(driver.getXpath("//*[@id=\"content\"]/div[2]/div[1]/div[1]/div/span[2]").getText())
+            .build());
+    }
+
+    private static void crawlingBitcoin(List<NaverWorldFinance> collect) {
+        driver.open(FinanceType.BTC.getUrl());
+        driver.wait(1);
+        collect.add(NaverWorldFinance.builder()
+            .title(FinanceType.BTC.getTitle())
+            .price(driver.getXpath("//*[@id=\"content\"]/div[2]/div[1]/div").getText())
+            .build());
     }
 
     private static void validModal() {
         WebElement xpath = driver.getXpath("//div[contains(@class, 'BottomModalNoticeWrapper-module_inner')]");
-        if (xpath != null) {
+        if (!ObjectUtils.isEmpty(xpath)) {
             log.info("modal 존재함");
             driver.getXpath("//button[contains(@class, 'BottomModalNoticeWrapper-module_button-close')]").click();
         }
-    }
-
-    private static void crawlingBitcoin(FinanceType type, List<NaverWorldFinance> collect) {
-        driver.open(type.getUrl());
-        driver.wait(1);
-        collect.add(NaverWorldFinance.builder()
-            .title(type.getTitle())
-            .price(driver.getXpath("//*[@id=\"content\"]/div[2]/div[1]/div").getText())
-            .build());
     }
 }

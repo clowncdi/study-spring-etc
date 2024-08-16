@@ -1,5 +1,7 @@
 package crawling;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -8,9 +10,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public abstract class BrowserDriver <T extends ChromeDriver> {
@@ -29,7 +28,7 @@ public abstract class BrowserDriver <T extends ChromeDriver> {
             this.driver.get(url);
             this.driver.manage().window().maximize();
         } catch (Exception e) {
-            log.error("Chrome Open URL Error : {}", e.getMessage());
+            log.error("Chrome Open URL Error : {}", e.getMessage(), e);
         }
     }
 
@@ -41,7 +40,7 @@ public abstract class BrowserDriver <T extends ChromeDriver> {
         try {
             element = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector)));
         } catch (WebDriverException e) {
-            log.error("{} 오브젝트를 불러오는데 실패했습니다.", selector);
+            log.warn("{} 오브젝트를 불러오는데 실패했습니다.", selector);
         }
         return element;
     }
@@ -54,7 +53,7 @@ public abstract class BrowserDriver <T extends ChromeDriver> {
         try {
             element = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xPath)));
         } catch (WebDriverException e) {
-            log.error("{} 오브젝트를 불러오는데 실패했습니다.", xPath);
+            log.warn("{} 오브젝트를 불러오는데 실패했습니다.", xPath);
         }
         return element;
     }
@@ -67,7 +66,7 @@ public abstract class BrowserDriver <T extends ChromeDriver> {
         try {
             element = driverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xPath)));
         } catch (WebDriverException e) {
-            log.error("{} 오브젝트를 불러오는데 실패했습니다.", xPath);
+            log.warn("{} 오브젝트를 불러오는데 실패했습니다.", xPath);
         }
         return element;
     }
@@ -95,9 +94,9 @@ public abstract class BrowserDriver <T extends ChromeDriver> {
      */
     public void wait(int second) {
         try {
-            Thread.sleep(second * 1000);
+            Thread.sleep(second * 1000L);
         } catch (InterruptedException e) {
-            log.error(e.getMessage());
+            log.warn("wait error", e);
         }
     }
 
