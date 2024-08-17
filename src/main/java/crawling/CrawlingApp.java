@@ -4,11 +4,11 @@ import crawling.dto.FinanceType;
 import crawling.dto.NaverWorldFinance;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.springframework.util.ObjectUtils;
 
 @Slf4j
 public class CrawlingApp {
@@ -58,7 +58,6 @@ public class CrawlingApp {
     private static void crawlingVix(List<NaverWorldFinance> collect) {
         driver.open(FinanceType.VIX.getUrl());
         driver.wait(1);
-//        validModal();
         collect.add(NaverWorldFinance.builder()
             .title(FinanceType.VIX.getTitle())
             .price(driver.getXpath("//*[@id=\"content\"]/div[2]/div[1]/div[1]/strong").getText())
@@ -76,10 +75,10 @@ public class CrawlingApp {
     }
 
     private static void validModal() {
-        WebElement xpath = driver.getXpath("//div[contains(@class, 'BottomModalNoticeWrapper-module_inner')]");
-        if (!ObjectUtils.isEmpty(xpath)) {
-            log.info("modal 존재함");
-            driver.getXpath("//button[contains(@class, 'BottomModalNoticeWrapper-module_button-close')]").click();
-        }
+        Optional.ofNullable(driver.getXpath("//div[contains(@class, 'BottomModalNoticeWrapper-module_inner')]"))
+            .ifPresent(el -> {
+                log.info("modal 존재함");
+                driver.getXpath("//button[contains(@class, 'BottomModalNoticeWrapper-module_button-close')]").click();
+            });
     }
 }
