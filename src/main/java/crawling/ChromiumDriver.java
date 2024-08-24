@@ -45,9 +45,8 @@ public class ChromiumDriver extends BrowserDriver<ChromeDriver> {
      */
     private void setHeadless() {
         options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-gpu");
+//        options.addArguments("--no-sandbox"); //Sandbox 프로세스를 사용하지 않음, Linux에서 headless를 사용하는 경우 필요함.
+//        options.addArguments("--disable-gpu"); //GPU를 사용하지 않음, Linux에서 headless를 사용하는 경우 필요함.
     }
 
     /**
@@ -61,14 +60,16 @@ public class ChromiumDriver extends BrowserDriver<ChromeDriver> {
             secureRandom = new SecureRandom();
         }
         options.addArguments("user-agent="+userAgents[secureRandom.nextInt(userAgents.length)]); // 사용자 에이전트 랜덤 설정
-
         options.addArguments("lang=ko_KR");
         options.addArguments("--disable-notifications"); // 알림 비활성
         options.addArguments("--disable-extensions"); // 확장 프로그램 비활성
         options.addArguments("--disable-setuid-sandbox"); // root 권한 무시
         options.addArguments("--disable-dev-shm-usage"); // 공유 메모리 사용을 비활성화
         options.addArguments("--single-process");
-        options.addArguments("--remote-allow-origins=*"); // 크로스 도메인 허용
+        options.addArguments("--remote-allow-origins=*"); // 크로스 도메인 허용//
+        options.addArguments("--disable-popup-blocking"); //팝업 무시
+        options.addArguments("--disable-default-apps"); //기본앱 사용안함
+
     }
 
     private void setByOs() {
