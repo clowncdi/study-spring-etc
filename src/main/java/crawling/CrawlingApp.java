@@ -60,8 +60,8 @@ public class CrawlingApp {
         driver.wait(1);
         collect.add(NaverWorldFinance.builder()
             .title(FinanceType.VIX.getTitle())
-            .price(driver.getXpath("//*[@id=\"content\"]/div[3]/div[1]/div[1]/strong").getText())
-            .rate(driver.getXpath("//*[@id=\"content\"]/div[3]/div[1]/div[1]/div/span[2]").getText())
+            .price(driver.getXpath("//*[@id=\"stockContentWrapper\"]/div[3]/div[1]/div[1]/strong").getText())
+            .rate(driver.getXpath("//*[@id=\"stockContentWrapper\"]/div[3]/div[1]/div[1]/div/span[2]").getText())
             .build());
     }
 
