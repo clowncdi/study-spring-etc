@@ -13,10 +13,19 @@ import org.openqa.selenium.WebElement;
 @Slf4j
 public class CrawlingApp {
 
-    private static final ChromiumDriver driver = new ChromiumDriver();
+    private final ChromiumDriver driver;
+
+    public CrawlingApp(ChromiumDriver driver) {
+        this.driver = driver;
+    }
 
     public static void main(String[] args) {
+        ChromiumDriver realDriver = new ChromiumDriver();
+        CrawlingApp app = new CrawlingApp(realDriver);
+        app.execute(); // 실행
+    }
 
+    public void execute() {
         driver.open("https://finance.naver.com/world/");
         WebElement americaIndex = driver.get("#americaIndex");
         List<NaverWorldFinance> collect = americaIndex.findElements(By.cssSelector("thead > tr")).stream()
@@ -42,7 +51,7 @@ public class CrawlingApp {
         driver.quit();
     }
 
-    private static void crawling(FinanceType type, List<NaverWorldFinance> collect, String xPath) {
+    public void crawling(FinanceType type, List<NaverWorldFinance> collect, String xPath) {
         driver.open(type.getUrl());
         driver.wait(1);
 //        validModal();
@@ -55,7 +64,7 @@ public class CrawlingApp {
             .findFirst().orElse(null));
     }
 
-    private static void crawlingVix(List<NaverWorldFinance> collect) {
+    public void crawlingVix(List<NaverWorldFinance> collect) {
         driver.open(FinanceType.VIX.getUrl());
         driver.wait(1);
         collect.add(NaverWorldFinance.builder()
@@ -65,7 +74,7 @@ public class CrawlingApp {
             .build());
     }
 
-    private static void crawlingBitcoin(List<NaverWorldFinance> collect) {
+    public void crawlingBitcoin(List<NaverWorldFinance> collect) {
         driver.open(FinanceType.BTC.getUrl());
         driver.wait(1);
         collect.add(NaverWorldFinance.builder()
@@ -74,7 +83,7 @@ public class CrawlingApp {
             .build());
     }
 
-    private static void validModal() {
+    public void validModal() {
         Optional.ofNullable(driver.getXpath("//div[contains(@class, 'BottomModalNoticeWrapper-module_inner')]"))
             .ifPresent(el -> {
                 log.info("modal 존재함");
